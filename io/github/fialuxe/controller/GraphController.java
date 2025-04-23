@@ -7,6 +7,8 @@ import io.github.fialuxe.model.GraphModel;
 import io.github.fialuxe.model.Point;
 import io.github.fialuxe.view.PlanarityPanel;
 
+//this class manages the mouse movement of planarity.
+//このクラスはPlanarityにおけるマウスの動きを管理する。
 public class GraphController extends MouseAdapter {
     private GraphModel model;
     private PlanarityPanel view;
