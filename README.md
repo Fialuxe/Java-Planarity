@@ -16,7 +16,9 @@ As noted in the comments, issues include casting processes and deprecated method
 (Also, it is too simple to play...)
 
 ## Requirement
-compiling Java code
+* Java Development Kit (JDK) 8 or higher
+* A Java compiler (e.g., javac)
+* A terminal or IDE (e.g., IntelliJ IDEA, Eclipse) for compiling and running the program
 
 ## Usage
 1. Download the source code:
