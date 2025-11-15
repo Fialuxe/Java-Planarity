@@ -21,18 +21,21 @@ public class GraphModel extends Observable {
     // ノードをグラフに追加し、オブザーバに変更を通知
     public void addNode(Point node) {
         nodes.add(node);
+        setChanged();
         notifyObservers(); // 状態変更の通知（描画更新など）
     }
 
     // 指定されたノードインデックスのペアでエッジを作成し、追加
     public void addEdge(int start, int end) {
         edges.add(new Edge(start, end));
+        setChanged();
         notifyObservers(); // 状態変更の通知
     }
 
     // 指定されたインデックスのノードを新しい位置に更新（Point使用版）
     public void moveNode(int index, Point newPosition) {
         nodes.set(index, newPosition);
+        setChanged();
         notifyObservers(); // 再描画や状態更新のトリガー
     }
 
@@ -42,9 +45,8 @@ public class GraphModel extends Observable {
         Point p = new Point((int)newPosition.getX(), (int)newPosition.getY());
         nodes.set(index, p);
 
-        System.out.println(isGameSolved());
-
         // ゲーム解決状態に応じた通知
+        setChanged();
         if (isGameSolved()) {
             notifyObservers("SOLVED");
         } else {
