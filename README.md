@@ -1,12 +1,13 @@
-# 🎮 Planarity Game - Enhanced Edition
+# 🎮 Planarity Game
 
 A modern, visually appealing implementation of the classic Planarity puzzle game built with Java Swing.
 
 [![Java](https://img.shields.io/badge/Java-8+-orange.svg)](https://www.oracle.com/java/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Cross--Platform-lightgrey.svg)]()
+<img width="900" height="674" alt="Screenshot 2025-11-15 at 15 59 59" src="https://github.com/user-attachments/assets/c2822b8a-0c29-4e32-84f1-aef6924c1b61" />
 
-<img width="638" alt="Screenshot 2025-05-04 at 15 43 51" src="https://github.com/user-attachments/assets/89a6cbde-0d17-444e-9f38-f8f58a18aa4e" />
+
 
 ---
 
@@ -87,13 +88,15 @@ Whether you're a puzzle enthusiast, a graph theory student, or just looking for 
 ---
 
 ## 📸 Screenshots
-
-### Game Interface (Japanese Mode)
+<img width="900" height="674" alt="Screenshot 2025-11-15 at 15 59 59" src="https://github.com/user-attachments/assets/7dfd3fcf-00a8-4245-90a5-5964d7455a90" />
+### Game Interface
 The main game screen shows the information panel, difficulty selector, and control buttons.
 
 ### Intersection Visualization
 Red lines indicate crossing edges, with white circular markers highlighting exact intersection points.
 
+
+<img width="895" height="666" alt="Screenshot 2025-11-15 at 16 01 05" src="https://github.com/user-attachments/assets/6d374b4d-6d16-46ff-9b45-6cce51bd90a4" />
 ### Victory Screen
 A congratulatory message appears when all intersections are eliminated.
 
