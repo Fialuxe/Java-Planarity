@@ -1,5 +1,7 @@
 package io.github.fialuxe.view;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.List;
 
@@ -10,8 +12,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 
-@SuppressWarnings("deprecation")
-public class PlanarityPanel extends JPanel implements Observer{
+/**
+ * Custom JPanel for rendering the Planarity game.
+ * 
+ * <p>This panel listens to PropertyChangeEvents from the GraphModel and
+ * repaints itself when the graph state changes.</p>
+ * 
+ * @author Fialuxe
+ * @version 2.0
+ */
+public class PlanarityPanel extends JPanel implements PropertyChangeListener {
     private GraphModel model;
     private int hoveredNodeIndex = -1;
     private int draggedNodeIndex = -1;
@@ -31,7 +41,7 @@ public class PlanarityPanel extends JPanel implements Observer{
     
     public PlanarityPanel(GraphModel model){
         this.model = model;
-        model.addObserver(this);
+        model.addPropertyChangeListener(this);
         setBackground(BG_COLOR);
         setPreferredSize(new Dimension(800, 600));
     }
@@ -201,15 +211,15 @@ public class PlanarityPanel extends JPanel implements Observer{
         
         // タイトル
         g2d.setColor(TEXT_COLOR);
-        g2d.setFont(new Font("Arial", Font.BOLD, 20));
+        g2d.setFont(new Font("Meiryo", Font.BOLD, 20));
         g2d.drawString(LanguageManager.getText("game.title"), 20, 35);
         
         // 説明テキスト
-        g2d.setFont(new Font("Arial", Font.PLAIN, 12));
+        g2d.setFont(new Font("Meiryo", Font.PLAIN, 12));
         g2d.drawString(LanguageManager.getText("game.description"), 20, 55);
         
         // 交差数表示
-        g2d.setFont(new Font("Arial", Font.BOLD, 14));
+        g2d.setFont(new Font("Meiryo", Font.BOLD, 14));
         if(model.isGameSolved()){
             g2d.setColor(SOLVED_COLOR);
             g2d.drawString(LanguageManager.getText("info.cleared"), 20, 80);
@@ -220,7 +230,7 @@ public class PlanarityPanel extends JPanel implements Observer{
         
         // ノード数とエッジ数
         g2d.setColor(TEXT_COLOR);
-        g2d.setFont(new Font("Arial", Font.PLAIN, 11));
+        g2d.setFont(new Font("Meiryo", Font.PLAIN, 11));
         g2d.drawString(LanguageManager.getText("info.stats", model.getNodes().size(), model.getEdges().size()), 20, 98);
     }
     
@@ -246,13 +256,13 @@ public class PlanarityPanel extends JPanel implements Observer{
         
         // おめでとうメッセージ
         g2d.setColor(SOLVED_COLOR);
-        g2d.setFont(new Font("Arial", Font.BOLD, 36));
+        g2d.setFont(new Font("Meiryo", Font.BOLD, 36));
         String message = LanguageManager.getText("solved.title");
         FontMetrics fm = g2d.getFontMetrics();
         int messageWidth = fm.stringWidth(message);
         g2d.drawString(message, boxX + (boxWidth - messageWidth) / 2, boxY + 60);
         
-        g2d.setFont(new Font("Arial", Font.PLAIN, 18));
+        g2d.setFont(new Font("Meiryo", Font.PLAIN, 18));
         g2d.setColor(TEXT_COLOR);
         String subMessage = LanguageManager.getText("solved.message");
         messageWidth = g2d.getFontMetrics().stringWidth(subMessage);
@@ -260,12 +270,20 @@ public class PlanarityPanel extends JPanel implements Observer{
     }
 
     @Override
-    public void update(Observable o, Object arg){
-        if(arg != null && arg.equals("SOLVED")){
-            showSolvedMessage = true;
-            solvedTime = System.currentTimeMillis();
-            System.out.println("SOLVED!");
+    public void propertyChange(PropertyChangeEvent evt) {
+        // Handle property change events from GraphModel
+        String propertyName = evt.getPropertyName();
+        
+        if (GraphModel.PROPERTY_GAME_SOLVED.equals(propertyName)) {
+            Boolean isSolved = (Boolean) evt.getNewValue();
+            if (isSolved != null && isSolved) {
+                showSolvedMessage = true;
+                solvedTime = System.currentTimeMillis();
+                System.out.println("SOLVED!");
+            }
         }
+        
+        // Repaint on any graph change
         repaint();
     }
     
@@ -279,3 +297,4 @@ public class PlanarityPanel extends JPanel implements Observer{
         repaint();
     }
 }
+
