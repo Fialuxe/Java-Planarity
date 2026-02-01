@@ -386,6 +386,3 @@ MIT License - See [LICENSE](LICENSE) file for details
   Made with ❤️ using SOLID principles and graph theory rigor
 </p>
 
-<p align="center">
-  <sub>Refactored from legacy code to enterprise-grade library (2026)</sub>
-</p>
